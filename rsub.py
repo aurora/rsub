@@ -116,7 +116,10 @@ class Session:
             sublime.run_command("new_window")
 
         # Open it within sublime
-        view = sublime.active_window().open_file(self.temp_path)
+        view = sublime.active_window().open_file(
+            "{0}:{1}:0".format(
+                self.temp_path, self.env['selection'] if 'selection' in self.env else 0),
+            sublime.ENCODED_POSITION)
 
         # Add the file metadata to the view's settings
         # This is mostly useful to obtain the path of this file on the server
